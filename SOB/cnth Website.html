@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOB Digital Business</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        :root {
+            --blue: #2a6fb3;
+            --yellow: #f4c400;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f4f7fc;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 60px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: var(--blue);
+        }
+
+        .logo img {
+            height: 45px;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 22px;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--blue);
+            color: white;
+            font-size: 12px;
+            padding: 3px 7px;
+            border-radius: 50%;
+        }
+
+        /* HERO */
+        .hero {
+            height: 90vh;
+            background: linear-gradient(rgba(42, 111, 179, 0.8), rgba(42, 111, 179, 0.8)),
+                url('https://images.unsplash.com/photo-1492724441997-5dc865305da7');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 45px;
+        }
+
+        .hero span {
+            color: var(--yellow);
+        }
+
+        /* SECTION */
+        section {
+            padding: 100px 10%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--blue);
+            font-size: 28px;
+        }
+
+        /* PRODUCT CARD */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .product {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: 0.3s;
+        }
+
+        .product:hover {
+            transform: translateY(-8px);
+        }
+
+        .product img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .product h3 {
+            color: var(--blue);
+            margin-bottom: 10px;
+        }
+
+        .product button {
+            margin-top: 10px;
+            padding: 10px;
+            width: 100%;
+            background: var(--yellow);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* CART SIDEBAR */
+        .cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 350px;
+            height: 100%;
+            background: white;
+            box-shadow: -3px 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            transition: 0.4s;
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .cart-total {
+            margin-top: 20px;
+            font-weight: 700;
+            color: var(--blue);
+        }
+
+        .close-cart {
+            cursor: pointer;
+            text-align: right;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">
+            <img src="logo SOB.jpeg" alt="Logo SOB">
+        </div>
+
+        <ul>
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#toko">Toko</a></li>
+            <li><a href="#layanan">Layanan</a></li>
+            <li><a href="#berita">Berita</a></li>
+        </ul>
+
+        <div class="cart-icon" onclick="toggleCart()">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="cart-count" id="cart-count">0</span>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero" id="beranda">
+        <h1>Solusi <span>Digital Modern</span></h1>
+        <p>Meningkatkan bisnis Anda ke level berikutnya</p>
+    </div>
+
+    <!-- PRODUK -->
+    <section id="toko">
+        <h2 class="section-title">Toko</h2>
+
+        <div class="products">
+
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71">
+                <span
+                    style="background:#f4c400;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:600;">Best
+                    Seller</span>
+                <h3>Template Website Premium</h3>
+                <p><strong>Rp 250.000</strong></p>
+
+                <p style="margin-top:10px;">
+                    Template website profesional yang siap pakai untuk bisnis, UMKM, maupun personal branding.
+                </p>
+
+                <ul style="margin-top:10px;font-size:14px;">
+                    <li>✔ Responsive (Mobile & Desktop)</li>
+                    <li>✔ Desain modern & clean</li>
+                    <li>✔ SEO Friendly</li>
+                    <li>✔ Mudah di-custom</li>
+                </ul>
+
+                <button onclick="addToCart('Template Website Premium',250000)">
+                    Tambah ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216">
+                <span
+                    style="background:#2a6fb3;color:white;padding:5px 10px;border-radius:20px;font-size:12px;font-weight:600;">New</span>
+                <h3>Desain Logo Profesional</h3>
+                <p><strong>Rp 150.000</strong></p>
+
+                <p style="margin-top:10px;">
+                    Jasa pembuatan logo eksklusif untuk memperkuat identitas brand bisnis Anda.
+                </p>
+
+                <ul style="margin-top:10px;font-size:14px;">
+                    <li>✔ 3 Konsep desain</li>
+                    <li>✔ Revisi hingga 3x</li>
+                    <li>✔ File HD & Vector</li>
+                    <li>✔ Hak milik penuh</li>
+                </ul>
+
+                <button onclick="addToCart('Desain Logo Profesional',150000)">
+                    Tambah ke Keranjang
+                </button>
+            </div>
+
+
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f">
+                <h3>Digital Marketing Package</h3>
+                <p><strong>Rp 500.000</strong></p>
+
+                <p style="margin-top:10px;">
+                    Paket pemasaran digital lengkap untuk meningkatkan traffic dan penjualan online.
+                </p>
+
+                <ul style="margin-top:10px;font-size:14px;">
+                    <li>✔ Strategi konten 1 bulan</li>
+                    <li>✔ Optimasi Instagram & TikTok</li>
+                    <li>✔ Iklan berbayar (Ads Setup)</li>
+                    <li>✔ Laporan performa</li>
+                </ul>
+
+                <button onclick="addToCart('Digital Marketing Package',500000)">
+                    Tambah ke Keranjang
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section id="layanan">
+        <h2 class="section-title">Layanan Kami</h2>
+
+        <div class="products">
+
+            <div class="product">
+                <h3>Website Development</h3>
+                <p>Membangun website profesional, responsif, dan modern untuk bisnis Anda.</p>
+            </div>
+
+            <div class="product">
+                <h3>Digital Marketing</h3>
+                <p>Meningkatkan penjualan dan brand awareness melalui strategi digital.</p>
+            </div>
+
+            <div class="product">
+                <h3>Social Media Management</h3>
+                <p>Mengelola dan mengoptimalkan media sosial bisnis Anda.</p>
+            </div>
+
+            <div class="product">
+                <h3>Branding & Design</h3>
+                <p>Menciptakan identitas visual yang kuat dan profesional.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="berita">
+        <h2 class="section-title">Berita & Artikel</h2>
+
+        <div class="products">
+
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c">
+                <h3>Tren Digital Marketing 2026</h3>
+                <p>Strategi terbaru untuk meningkatkan bisnis online di era modern.</p>
+            </div>
+
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1521791055366-0d553872125f">
+                <h3>Pentingnya Website untuk UMKM</h3>
+                <p>Website profesional meningkatkan kepercayaan dan kredibilitas bisnis.</p>
+            </div>
+
+            <div class="product">
+                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d">
+                <h3>Optimasi Media Sosial</h3>
+                <p>Cara meningkatkan engagement dan penjualan melalui Instagram & TikTok.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        © 2026 SOB Digital Business
+    </footer>
+
+    <!-- CART SIDEBAR -->
+    <div class="cart-sidebar" id="cart">
+        <div class="close-cart" onclick="toggleCart()">✖ Tutup</div>
+        <div id="cart-items"></div>
+        <div class="cart-total">Total: Rp <span id="total">0</span></div>
+    </div>
+
+    <script>
+        let cart = []
+        let total = 0
+
+        function toggleCart() {
+            document.getElementById("cart").classList.toggle("active")
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price })
+            total += price
+            updateCart()
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById("cart-items")
+            cartItems.innerHTML = ""
+            cart.forEach((item, index) => {
+                cartItems.innerHTML += `
+<div class="cart-item">
+${item.name}
+<span>Rp ${item.price.toLocaleString()}</span>
+</div>`
+            })
+
+            document.getElementById("total").innerText = total.toLocaleString()
+            document.getElementById("cart-count").innerText = cart.length
+        }
+    </script>
+
+</body>
+
+</html>
